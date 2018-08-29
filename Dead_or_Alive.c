@@ -16,8 +16,7 @@ void deadoralive (void)                           //Esta función revisa las cé
     {
         for (col=1; col<(SIZE-1); col++)
         {
-            int y;                                //Se crean 2 variables provisorias como punteros auxiliares para revisar los alrededores de la célula
-            int x;
+            int y, x;                                //Se crean 2 variables provisorias como punteros auxiliares para revisar los alrededores de la célula
             int alive;                            //Se crea una variable local como contador para las células vivas que 'rodean' a la célula analizada
 
             for (y=row-1; y<row+2;y++)            //Ahora revisa cada célula adyacente y si están vivas incrementa el contador
@@ -42,15 +41,15 @@ void deadoralive (void)                           //Esta función revisa las cé
                     future [row] [col] = ' ';
                 }
             }
-            else                                  //Sea cual sea el resultado la nueva célula se guardará en una nueva matriz, que luego se imprimirá en pantalla
+            else                                  //En caso de estar nuerta debemos analizar si revive
             {
                 if (alive == 3)
                 {
-                    future [row] [col] = '*';
+                    future [row] [col] = '*';     //La celula revive
                 }
                 else
                 {
-                    future [row] [col] = ' ';
+                    future [row] [col] = ' ';   //La ccelula sigue muerta
                 }
 
             }
