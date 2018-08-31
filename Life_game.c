@@ -22,4 +22,5 @@ int main (void)
         universe = primordial;
     }
     input=getchar();
+    return 0;
 }
