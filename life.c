@@ -8,10 +8,10 @@ void print_mundo(arr[M][N])
 {
     int countfil, countcol;
     countfil=1;  //Empieza 1 porque empieza en la segunda fila
-    while(countfil<=(M-2)) //Por como pensamos el arr. imprime toda fila menos los bordes
+    while(countfil<=(SIZE-2)) //Por como pensamos el arr. imprime toda fila menos los bordes
     {
         countcol=1; //Con esto señalamos el segundo elemento de la segunda fila
-        while(countcol<=(N-2)) //Restamos 2 porque tiene dos cols. "fantasmas"
+        while(countcol<=(SIZE-2)) //Restamos 2 porque tiene dos cols. "fantasmas"
         {
             printf("%c",arr[countfil][countcol]);
               ++countcol;
@@ -19,14 +19,14 @@ void print_mundo(arr[M][N])
         ++countfil;
     }
 
-    void copypaste(copy[M][N], paste[M][N])
+    void copypaste(copy[SIZE][SIZE], paste[SIZE][SIZE])
     {
         int countfil, countcol;
         countfil=0; //Primerea fila
-        while(countfil<=M)  //Menos a la cantidad de columnas totales
+        while(countfil<=SIZE)  //Menos a la cantidad de columnas totales
         {
             countcol=0; //Primera columna
-            while(countcol<=N)  //Menor a la cantidad de filas totales
+            while(countcol<=SIZE)  //Menor a la cantidad de filas totales
             {
                 paste[countfil][countcol]=copy[countfil][countcol]; //Igualamos sus valores
                 ++countcol; //Columna siguiente dentro de la fila
