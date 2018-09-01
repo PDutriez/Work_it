@@ -17,20 +17,22 @@ void print_mundo(arr[M][N])
               ++countcol;
         }
         ++countfil;
+        printf("\n");
     }
+}
 
-    void copypaste(copy[SIZE][SIZE], paste[SIZE][SIZE])
+void copypaste(copy[SIZE][SIZE], paste[SIZE][SIZE])
+{
+    int countfil, countcol;
+    countfil=0; //Primerea fila
+    while(countfil<=SIZE)  //Menos a la cantidad de columnas totales
     {
-        int countfil, countcol;
-        countfil=0; //Primerea fila
-        while(countfil<=SIZE)  //Menos a la cantidad de columnas totales
+        countcol=0; //Primera columna
+        while(countcol<=SIZE)  //Menor a la cantidad de filas totales
         {
-            countcol=0; //Primera columna
-            while(countcol<=SIZE)  //Menor a la cantidad de filas totales
-            {
-                paste[countfil][countcol]=copy[countfil][countcol]; //Igualamos sus valores
-                ++countcol; //Columna siguiente dentro de la fila
-            }
+            paste[countfil][countcol]=copy[countfil][countcol]; //Igualamos sus valores
+            ++countcol; //Columna siguiente dentro de la fila
+        }
         ++countfil; //Fila siguiente
     }
 }

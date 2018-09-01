@@ -4,13 +4,13 @@
 char universe [SIZE] [SIZE];
 char future [SIZE] [SIZE];
 
-void deadoralive (void)                           //Esta función revisa las células y las actualiza en una matriz provisoria
+void deadoralive (int arr1[MAX][MAX],int arr2[MAX][MAX])                           //Esta función revisa las células y las actualiza en una matriz provisoria
 {
     int col;                                      //Puntero para columnas en la matriz
     int row;                                      //Puntero para filas en la matriz
-    for (row=1; row<(SIZE-1); row++)              //Consecituivamente se desplazará en un arreglo menor al original ya que los bordes no se modifican
+    for (row=inicio; row<(SIZE-inicio); row++)              //Consecituivamente se desplazará en un arreglo menor al original ya que los bordes no se modifican
     {
-        for (col=1; col<(SIZE-1); col++)
+        for (col=inicio; col<(SIZE-inicio); col++)
         {
             int y, x;                              //Se crean 2 variables provisorias como punteros auxiliares para revisar los alrededores de la célula
             int alive;                            //Se crea una variable local como contador para las células vivas que 'rodean' a la célula analizada
@@ -19,33 +19,33 @@ void deadoralive (void)                           //Esta función revisa las cé
             {
                 for (x=col-1; x<col+2; x++)
                 {
-                    if ((universe[y][x] == '*') && (y!=row || x!=col))
+                    if ((arr1[y][x] == '*') && (y!=row || x!=col))
                     {                             //En caso de que x=col o y=row implica que se analiza la misma celula
                         alive++;
                     }
                 }
 
             }
-            if (universe [row] [col] == '*')      //Dependiendo de si la célula estaba originalmente viva o muerta se aplicarán distintos criterios dictados por las reglas
+            if (arr1 [row] [col] == '*')      //Dependiendo de si la célula estaba originalmente viva o muerta se aplicarán distintos criterios dictados por las reglas
             {
                 if (alive == 2 || alive == 3)
                 {
-                    future [row] [col] = '*';
+                    arr2 [row] [col] = '*';
                 }
                 else
                 {
-                    future [row] [col] = ' ';
+                    arr2 [row] [col] = ' ';
                 }
             }
             else                                  //En caso de estar nuerta debemos analizar si revive
             {
                 if (alive == 3)
                 {
-                    future [row] [col] = '*';     //La celula revive
+                    arr2 [row] [col] = '*';     //La celula revive
                 }
                 else
                 {
-                    future [row] [col] = ' ';   //La ccelula sigue muerta
+                    arr2 [row] [col] = ' ';   //La ccelula sigue muerta
                 }
 
             }
