@@ -1,6 +1,5 @@
 #include <stdio.h>
 #define MAX 101 //Es el tamaño de las matrices
-void lgame (void);
 void create(int n); //Creal la matriz elegida por el USUARIO
 void copypaste(char copy[MAX][MAX],char paste[MAX][MAX]); //Copia una matriz en otra
 void print_mundo(char arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
