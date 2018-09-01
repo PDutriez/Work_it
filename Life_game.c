@@ -37,8 +37,6 @@ int main (void)
               deadoralive(universe,future);
               copypaste(future, universe);
           }
-
-          lgame ();
       }
       else if (input == 'R' || input == 'r')
       {
