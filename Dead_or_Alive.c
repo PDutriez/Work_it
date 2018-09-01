@@ -4,13 +4,13 @@
 char universe [SIZE] [SIZE];
 char future [SIZE] [SIZE];
 
-void deadoralive (int arr1[MAX][MAX],int arr2[MAX][MAX])                           //Esta función revisa las células y las actualiza en una matriz provisoria
+void deadoralive (int arr1[MAX][MAX],int arr2[MAX][MAX])  //Esta función revisa las células y las actualiza en una matriz provisoria
 {
     int col;                                      //Puntero para columnas en la matriz
     int row;                                      //Puntero para filas en la matriz
-    for (row=inicio; row<(SIZE-inicio); row++)              //Consecituivamente se desplazará en un arreglo menor al original ya que los bordes no se modifican
+    for (row=inicio; row<(MAX-inicio); row++)              //Consecituivamente se desplazará en un arreglo menor al original ya que los bordes no se modifican
     {
-        for (col=inicio; col<(SIZE-inicio); col++)
+        for (col=inicio; col<(MAX-inicio); col++)
         {
             int y, x;                              //Se crean 2 variables provisorias como punteros auxiliares para revisar los alrededores de la célula
             int alive;                            //Se crea una variable local como contador para las células vivas que 'rodean' a la célula analizada
