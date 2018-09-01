@@ -59,7 +59,7 @@ void create(int n) //Creal la matriz elegida por el USUARIO
       for(i=inicio ; i<tope ; i+=n)
       universe[i][j]='*';
     }
-    printf("Tamaño cargado correctamente, por favor aprete 'S' para iniciar\n")
+    printf("Tamaño cargado correctamente, por favor aprete 'S' para iniciar\n");
 }
 
 void copypaste(int copy[MAX][MAX], int paste[MAX][MAX]) //Copia una matriz en otra
