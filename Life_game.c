@@ -2,9 +2,9 @@
 #define MAX 101 //Es el tamaño de las matrices
 void lgame (void);
 void create(int n); //Creal la matriz elegida por el USUARIO
-void copypaste(int copy[MAX][MAX],int paste[MAX][MAX]); //Copia una matriz en otra
-void print_mundo(int arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
-void deadoralive (int arr1[MAX][MAX],int arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
+void copypaste(char copy[MAX][MAX],char paste[MAX][MAX]); //Copia una matriz en otra
+void print_mundo(char arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
+void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
 
 int input, num, inicio, tope;
 char universe [MAX][MAX];
@@ -15,7 +15,7 @@ int main (void)
     input=getchar();
     //DEBERIA INICIAR ALGUNAS COSAS (MATRIZ ETC)
     printf("Este es el juego de la vida, usted tiene la opcion de elegir el tamaño \n");
-    printf("de la matriz entre 1 y 100, indique el tamaño que desea usar:...\n", );
+    printf("de la matriz entre 1 y 100, indique el tamaño que desea usar:...\n");
     while((input=getchar()) != EOF)
     {
       if(input<='9' && input>='0')
@@ -62,7 +62,7 @@ void create(int n) //Creal la matriz elegida por el USUARIO
     printf("Tamaño cargado correctamente, por favor aprete 'S' para iniciar\n");
 }
 
-void copypaste(int copy[MAX][MAX], int paste[MAX][MAX]) //Copia una matriz en otra
+void copypaste(char copy[MAX][MAX], char paste[MAX][MAX]) //Copia una matriz en otra
 {
     int countfil, countcol;
     countfil=inicio; //Primerea fila
@@ -77,7 +77,7 @@ void copypaste(int copy[MAX][MAX], int paste[MAX][MAX]) //Copia una matriz en ot
         ++countfil; //Fila siguiente
     }
 }
-void print_mundo(int arr[MAX][MAX]) //Esta funcion imprime la matriz en pantalla
+void print_mundo(char arr[MAX][MAX]) //Esta funcion imprime la matriz en pantalla
 {
     int countfil, countcol;
     countfil=inicio;
@@ -94,7 +94,7 @@ void print_mundo(int arr[MAX][MAX]) //Esta funcion imprime la matriz en pantalla
     }
 }
 
-void deadoralive (int arr1[MAX][MAX],int arr2[MAX][MAX])  //Esta función revisa las células y las actualiza en una matriz provisoria
+void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revisa las células y las actualiza en una matriz provisoria
 {
     int col;                                      //Puntero para columnas en la matriz
     int row;                                      //Puntero para filas en la matriz
