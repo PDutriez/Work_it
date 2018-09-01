@@ -2,12 +2,12 @@
 #define MAX 101 //Es el tamaño de las matrices
 void lgame (void);
 void create(int n); //Creal la matriz elegida por el USUARIO
-void copypaste(int copy[SIZE][SIZE],int paste[SIZE][SIZE]); //Copia una matriz en otra
-void print_mundo(int arr[M][N]); //Esta funcion imprime la matriz en pantalla
+void copypaste(int copy[MAX][MAX],int paste[MAX][MAX]); //Copia una matriz en otra
+void print_mundo(int arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
 void deadoralive (int arr1[MAX][MAX],int arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
 
-int input, num, SIZE, inicio, tope;
-char universe [MAX] [MAX];
+int input, num, inicio, tope;
+char universe [MAX][MAX];
 char future [MAX] [MAX];
 
 int main (void)
@@ -41,9 +41,9 @@ int main (void)
 
           lgame ();
       }
-      else (input == 'R' || input == 'r')
+      else if (input == 'R' || input == 'r')
       {
-          universe = primordial;
+          //DEBERIA REINICIAR TODAS LAS COSAS
       }
       input=getchar();
     }
@@ -62,7 +62,7 @@ void create(int n) //Creal la matriz elegida por el USUARIO
     printf("Tamaño cargado correctamente, por favor aprete 'S' para iniciar\n")
 }
 
-void copypaste(int copy[SIZE][SIZE], int paste[SIZE][SIZE]) //Copia una matriz en otra
+void copypaste(int copy[MAX][MAX], int paste[MAX][MAX]) //Copia una matriz en otra
 {
     int countfil, countcol;
     countfil=inicio; //Primerea fila
@@ -77,7 +77,7 @@ void copypaste(int copy[SIZE][SIZE], int paste[SIZE][SIZE]) //Copia una matriz e
         ++countfil; //Fila siguiente
     }
 }
-void print_mundo(int arr[M][N]) //Esta funcion imprime la matriz en pantalla
+void print_mundo(int arr[MAX][MAX]) //Esta funcion imprime la matriz en pantalla
 {
     int countfil, countcol;
     countfil=inicio;
