@@ -5,17 +5,16 @@ void copypaste(char copy[MAX][MAX],char paste[MAX][MAX]); //Copia una matriz en 
 void print_mundo(char arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
 void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
 
-int input, num, inicio, tope;
+int input, num, inicio, tope, i;
 char universe [MAX][MAX];
 char future [MAX] [MAX];
 
 int main (void)
 {
-    input=getchar();
+  printf("Este es el juego de la vida, usted tiene la opcion de elegir el tamaño \n");
+  printf("de la matriz entre 1 y 100, indique el tamaño que desea usar:...\n");
     //DEBERIA INICIAR ALGUNAS COSAS (MATRIZ ETC)
-    printf("Este es el juego de la vida, usted tiene la opcion de elegir el tamaño \n");
-    printf("de la matriz entre 1 y 100, indique el tamaño que desea usar:...\n");
-    while((input=getchar()) != EOF)
+    while((input=getchar()) != ('R'||'r'))
     {
       if(input<='9' && input>='0')
       {
@@ -28,32 +27,31 @@ int main (void)
           putchar('\n');
           num=0; //Si se cargaron bien lo datos no pasa nada pero en caso contrario se necesita resetear este valor
       }
-      if (input == 'S' || input == 's') //Se inicia el juego
+      else if (input == 'S' || input == 's') //Se inicia el juego
       {
           printf("Si quiere parar el juego aprete 'ENTER'\n");
-          while((input=getchar()) != '\n')
+	        while(i<100)
           {
               print_mundo(universe);
               deadoralive(universe,future);
               copypaste(future, universe);
+	            ++i;
           }
       }
-      else if (input == 'R' || input == 'r')
-      {
-          //DEBERIA REINICIAR TODAS LAS COSAS
-      }
-      input=getchar();
     }
+
 }
 void create(int n) //Creal la matriz elegida por el USUARIO
 {                  //Ademas de los punteros de la misma dentro de la amtriz original
+    deadoralive(universe,universe); //Al estar ambos arreglos con 0s lo que hacemos con esto llenarlo de...
+    deadoralive(future,future);     //espacios para que tengan los requisitos del juego
     inicio=(MAX - n)/2; //Se creal el inicio de la matriz a nostrar
     tope=MAX-inicio; //Se creal el tope de la matriz a mostrar
     (n%2)? :--tope; //Al ser un numero par se trunca el valor y se agega un casillero falso
     int i, j; //Variables punteros
-    for(j=inicio ; j<tope ; ++j)
+    for(i=inicio ; i<tope ; ++i)
     {
-      for(i=inicio ; i<tope ; i+=n)
+      for(j=inicio ; j<tope ; j+=(n/2-1))
       universe[i][j]='*';
     }
     printf("Tamaño cargado correctamente, por favor aprete 'S' para iniciar\n");
@@ -83,10 +81,12 @@ void print_mundo(char arr[MAX][MAX]) //Esta funcion imprime la matriz en pantall
         countcol=inicio; //Con esto señalamos el segundo elemento de la segunda fila
         while(countcol<tope)
         {
-            printf("%c",arr[countfil][countcol]);
+            putchar('|');
+            printf("%c ",arr[countfil][countcol]);
             ++countcol;
         }
         ++countfil;
+        putchar('|');
         putchar('\n');
     }
 }
@@ -113,26 +113,26 @@ void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revi
                 }
 
             }
-            if (arr1 [row][col] == '*')      //Dependiendo de si la célula estaba originalmente viva o muerta se aplicarán distintos criterios dictados por las reglas
+            if (arr1[row][col] == '*')      //Dependiendo de si la célula estaba originalmente viva o muerta se aplicarán distintos criterios dictados por las reglas
             {
                 if (alive == 2 || alive == 3)
                 {
-                    arr2 [row][col] = '*';
+                    arr2[row][col] = '*';
                 }
                 else
                 {
-                    arr2 [row][col] = ' ';
+                    arr2[row][col] = ' ';
                 }
             }
             else                                //En caso de estar nuerta debemos analizar si revive
             {
                 if (alive == 3)
                 {
-                    arr2 [row] [col] = '*';    //La celula revive
+                    arr2[row][col] = '*';    //La celula revive
                 }
                 else
                 {
-                    arr2 [row] [col] = ' ';   //La ccelula sigue muerta
+                    arr2[row][col] = ' ';   //La ccelula sigue muerta
                 }
 
             }
