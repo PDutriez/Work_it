@@ -3,9 +3,9 @@
 void create(int n); //Creal la matriz elegida por el USUARIO
 void copypaste(char copy[MAX][MAX],char paste[MAX][MAX]); //Copia una matriz en otra
 void print_mundo(char arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
-void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
+int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
 void time_clean(void); //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
-int input, num, inicio, tope;
+int input, num, inicio, tope, i, talive=1;
 char universe [MAX][MAX];
 char future [MAX] [MAX];
 
@@ -29,15 +29,17 @@ int main (void)
       }
       else if (input == 'S' || input == 's') //Se inicia el juego
       {
-          printf("Si quiere parar el juego aprete 'ENTER'\n");
+          printf("Si quiere parar el juego aprete 'CTRL + C'\n");
           time_clean();
-          while((input=getchar()) != ('R'||'r'))
+          while(talive!=0)
           {
-              print_mundo(universe);
-              deadoralive(universe,future);
-              copypaste(future, universe);
+              print_mundo(universe);  //Se imprime el mundo actual
+              talive=deadoralive(universe,future);  //Se lo analiza y ademas verifica que no este vacio
+              copypaste(future, universe); //Se lo copia en la otra matriz para imprimirlo al empezar el while
               time_clean();
           }
+          printf("Parece que el juego ha terminado....\n");
+          inicio=0, tope=0, talive=1; //Se cargan estos valores para poder reiniciar el juego en caso de terminarse
       }
     }
 
@@ -48,7 +50,7 @@ void create(int n) //Creal la matriz elegida por el USUARIO
     deadoralive(future,future);     //espacios para que tengan los requisitos del juego
     inicio=(MAX - n)/2; //Se creal el inicio de la matriz a nostrar
     tope=MAX-inicio; //Se creal el tope de la matriz a mostrar
-    (n%2)? :--tope; //Al ser un numero par se trunca el valor y se agega un casillero falso
+    tope-=((n%2)?1:0); //Al ser un numero inpar se trunca el valor y se agega un casillero falso
     int i, j; //Variables punteros
     for(i=inicio ; i<tope ; ++i)
     {
@@ -75,9 +77,8 @@ void copypaste(char copy[MAX][MAX], char paste[MAX][MAX]) //Copia una matriz en 
 }
 void print_mundo(char arr[MAX][MAX]) //Esta funcion imprime la matriz en pantalla
 {
-    int countfil, countcol, g;
+    int countfil, countcol;
     countfil=inicio;
-    for(g=0;g<num;++g)putchar('_');
     while(countfil<tope)
     {
         countcol=inicio; //Con esto señalamos el segundo elemento de la segunda fila
@@ -91,13 +92,13 @@ void print_mundo(char arr[MAX][MAX]) //Esta funcion imprime la matriz en pantall
         putchar('|'); //se ponen guiones para separar el borde
         putchar('\n'); //Se pone ENTER para que inicie la nueva linea
     }
-    for(g=0;g<num;++g)putchar('_');
 }
 
-void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revisa las células y las actualiza en una matriz provisoria
+int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revisa las células y las actualiza en una matriz provisoria
 {
     int col;                                      //Puntero para columnas en la matriz
     int row;                                      //Puntero para filas en la matriz
+    int falive=0;                                   //Cantidad final de celulas vivas
     for (row=inicio; row<tope; row++)              //Consecituivamente se desplazará en un arreglo menor al original ya que los bordes no se modifican
     {
         for (col=inicio; col<tope; col++)
@@ -121,6 +122,7 @@ void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revi
                 if (alive == 2 || alive == 3)
                 {
                     arr2[row][col] = '*';
+                    ++falive;
                 }
                 else
                 {
@@ -132,6 +134,7 @@ void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revi
                 if (alive == 3)
                 {
                     arr2[row][col] = '*';    //La celula revive
+                    ++falive;
                 }
                 else
                 {
@@ -142,6 +145,7 @@ void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revi
                                               //El proceso se repite para todas las células del arreglo interior
         }
     }
+    return falive; //Devolvemos la cantidad de celulas vivas en el nuevo mundo
 }
 void time_clean(void) //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
 {
