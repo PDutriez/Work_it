@@ -4,7 +4,7 @@ void create(int n); //Creal la matriz elegida por el USUARIO
 void copypaste(char copy[MAX][MAX],char paste[MAX][MAX]); //Copia una matriz en otra
 void print_mundo(char arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
 void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
-
+void time_clean(void); //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
 int input, num, inicio, tope, i;
 char universe [MAX][MAX];
 char future [MAX] [MAX];
@@ -35,6 +35,7 @@ int main (void)
               print_mundo(universe);
               deadoralive(universe,future);
               copypaste(future, universe);
+              time_clean();
 	            ++i;
           }
       }
@@ -100,7 +101,7 @@ void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revi
         for (col=inicio; col<tope; col++)
         {
             int y, x;                              //Se crean 2 variables provisorias como punteros auxiliares para revisar los alrededores de la célula
-            int alive;                            //Se crea una variable local como contador para las células vivas que 'rodean' a la célula analizada
+            int alive=0;                            //Se crea una variable local como contador para las células vivas que 'rodean' a la célula analizada
 
             for (y=row-1; y<row+2;y++)            //Ahora revisa cada célula adyacente y si están vivas incrementa el contador
             {
@@ -139,4 +140,12 @@ void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revi
                                               //El proceso se repite para todas las células del arreglo interior
         }
     }
+}
+void time_clean(void) //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
+{
+    long time;
+    for(time=0;time<400000000;++time);
+    for(time=0;time<25;++time)
+    printf("\n");
+
 }
