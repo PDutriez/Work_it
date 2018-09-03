@@ -1,11 +1,11 @@
 #include <stdio.h>
-#define MAX 101 //Es el tamaño de las matrices
+#define MAX 102 //Es el tamaño de las matrices
 void create(int n); //Creal la matriz elegida por el USUARIO
 void copypaste(char copy[MAX][MAX],char paste[MAX][MAX]); //Copia una matriz en otra
 void print_mundo(char arr[MAX][MAX]); //Esta funcion imprime la matriz en pantalla
 void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]); //Esta función revisa las células y las actualiza en una matriz provisoria
 void time_clean(void); //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
-int input, num, inicio, tope, i;
+int input, num, inicio, tope;
 char universe [MAX][MAX];
 char future [MAX] [MAX];
 
@@ -14,7 +14,7 @@ int main (void)
   printf("Este es el juego de la vida, usted tiene la opcion de elegir el tamaño \n");
   printf("de la matriz entre 1 y 100, indique el tamaño que desea usar:...\n");
     //DEBERIA INICIAR ALGUNAS COSAS (MATRIZ ETC)
-    while((input=getchar()) != ('R'||'r'))
+    while((input=getchar()) != EOF)
     {
       if(input<='9' && input>='0')
       {
@@ -30,13 +30,13 @@ int main (void)
       else if (input == 'S' || input == 's') //Se inicia el juego
       {
           printf("Si quiere parar el juego aprete 'ENTER'\n");
-	        while(i<100)
+          time_clean();
+          while((input=getchar()) != ('R'||'r'))
           {
               print_mundo(universe);
               deadoralive(universe,future);
               copypaste(future, universe);
               time_clean();
-	            ++i;
           }
       }
     }
@@ -75,21 +75,23 @@ void copypaste(char copy[MAX][MAX], char paste[MAX][MAX]) //Copia una matriz en 
 }
 void print_mundo(char arr[MAX][MAX]) //Esta funcion imprime la matriz en pantalla
 {
-    int countfil, countcol;
+    int countfil, countcol, g;
     countfil=inicio;
+    for(g=0;g<num;++g)putchar('_');
     while(countfil<tope)
     {
         countcol=inicio; //Con esto señalamos el segundo elemento de la segunda fila
         while(countcol<tope)
         {
-            putchar('|');
+            putchar('|'); //Separacion entre columnas
             printf("%c ",arr[countfil][countcol]);
             ++countcol;
         }
         ++countfil;
-        putchar('|');
-        putchar('\n');
+        putchar('|'); //se ponen guiones para separar el borde
+        putchar('\n'); //Se pone ENTER para que inicie la nueva linea
     }
+    for(g=0;g<num;++g)putchar('_');
 }
 
 void deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revisa las células y las actualiza en una matriz provisoria
@@ -145,7 +147,7 @@ void time_clean(void) //Esta funcion se encarga de hacer tiempo y limpiar la pan
 {
     long time;
     for(time=0;time<400000000;++time);
-    for(time=0;time<25;++time)
+    for(time=0;time<inicio;++time)
     printf("\n");
 
 }
