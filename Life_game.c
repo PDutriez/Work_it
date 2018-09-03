@@ -150,8 +150,8 @@ int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX])  //Esta función revis
 void time_clean(void) //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
 {
     long time;
-    for(time=0;time<400000000;++time);
-    for(time=0;time<inicio;++time)
+    for(time=0;time<300000000;++time); //El tiempo fijado fue elegido a ojo y gusto del programador
+    for(time=0;time<inicio;++time) //Se limia la pantalla para que aparezca ordenado
     printf("\n");
 
 }
