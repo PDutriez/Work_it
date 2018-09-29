@@ -1,8 +1,10 @@
+#ifndef CREATION_H
+#define CREATION_H
 /*******************************************************************************
  * PROTOTIPOS DE FUNCIONES
  ******************************************************************************/
 void create(int n);
-int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]);  //Esta función revisa las células y las actualiza en una matriz provisoria
+int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX], int *p);  //Esta función revisa las células y las actualiza en una matriz provisoria
 
 /*******************************************************************************
  * CONSTANTES
@@ -13,7 +15,8 @@ int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX]);  //Esta función revi
 /*******************************************************************************
  * VARIABLES UTILIZABLES
  ******************************************************************************/
-
 extern int  inicio, tope;
 extern char universe [MAX][MAX];
 extern char future [MAX] [MAX];
+
+#endif
