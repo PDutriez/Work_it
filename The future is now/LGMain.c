@@ -7,6 +7,7 @@ int main (void)
     int input, num, talive=1;
     char universe [MAX][MAX];
     char future [MAX] [MAX];
+    int walls [2];
     printf("Este es el juego de la vida, usted tiene la opcion de elegir el tamaño \n");
     printf("de la matriz entre 1 y 100, indique el tamaño que desea usar:...\n");
     while((input=getchar()) != EOF)
@@ -19,13 +20,9 @@ int main (void)
       else if (input=='\n')
       {
           if (num<=100 && num>=1)
-          {
-              create(num);
-          }
-          else if
-          {
+              create(num, walls);
+          else
                printf("\nVuelva a ingresar los datos");
-          }
           putchar('\n');
           num=0; //Si se cargaron bien lo datos no pasa nada pero en caso contrario se necesita resetear este valor
       }
@@ -35,10 +32,10 @@ int main (void)
           time_clean();
           while(talive!=0)
           {
-              print_mundo(universe);  //Se imprime el mundo actual
-              talive=deadoralive(universe,future);  //Se lo analiza y ademas verifica que no este vacio
-              copypaste(future, universe); //Se lo copia en la otra matriz para imprimirlo al empezar el while
-              time_clean();
+              print_mundo(universe, walls);  //Se imprime el mundo actual
+              talive=deadoralive(universe,future, walls);  //Se lo analiza y ademas verifica que no este vacio
+              copypaste(future, universe, walls); //Se lo copia en la otra matriz para imprimirlo al empezar el while
+              time_clean(walls);
           }
           printf("Parece que el juego ha terminado....\n");
           inicio=0, tope=0, talive=1; //Se cargan estos valores para poder reiniciar el juego en caso de terminarse
