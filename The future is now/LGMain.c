@@ -29,7 +29,7 @@ int main (void)
       else if (input == 'S' || input == 's') //Se inicia el juego
       {
           printf("Si quiere parar el juego aprete 'CTRL + C'\n");
-          time_clean();
+          time_clean(walls);
           while(talive!=0)
           {
               print_mundo(universe, walls);  //Se imprime el mundo actual

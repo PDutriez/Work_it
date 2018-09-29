@@ -3,9 +3,9 @@
 /*******************************************************************************
  * PROTOTIPOS DE FUNCIONES
  ******************************************************************************/
-void create(int n);
+void create(int n, int *p,char arr1[MAX][MAX],char arr2[MAX][MAX]); //Creal la matriz elegida por el USUARIO
 int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX], int *p);  //Esta función revisa las células y las actualiza en una matriz provisoria
-
+static void clean(char arr1 [MAX][MAX]);             //Funcion que se encarga de la limpieza de matrices
 /*******************************************************************************
  * CONSTANTES
  ******************************************************************************/

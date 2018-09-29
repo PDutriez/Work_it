@@ -17,6 +17,7 @@ void print_mundo(char arr[MAX][MAX], int *p)                            //Esta f
         putchar('\n');                                          //Se pone ENTER para que inicie la nueva linea
     }
 }
+
 void copypaste(char copy[MAX][MAX], char paste[MAX][MAX], int *p)       //Copia una matriz en otra
 {
     int countfil, countcol;

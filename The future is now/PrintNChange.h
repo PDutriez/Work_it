@@ -8,5 +8,3 @@ void print_mundo(char arr[MAX][MAX], int *p);                        //Esta func
 void time_clean(int *p);                                             //Esta funcion se encarga de hacer tiempo y limpiar la pantalla para hacer que se vea bien la nueva generacion
 
 #endif
-
-
