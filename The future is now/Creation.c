@@ -1,5 +1,6 @@
 #include "Creation.h"
 #include <stdio.h>
+static void clean(char arr1 [MAX][MAX]);             //Funcion que se encarga de la limpieza de matrices
 
 void create(int n, int *p,char arr1[MAX][MAX],char arr2[MAX][MAX])//Creal la matriz elegida por el USUARIO
 {                                           //Ademas de los punteros de la misma dentro de la amtriz original
@@ -9,8 +10,8 @@ void create(int n, int *p,char arr1[MAX][MAX],char arr2[MAX][MAX])//Creal la mat
     p[2]-=((n%2)?1:0);                      //Al ser un numero inpar se trunca el valor y se agega un casillero falso
     clean(arr1);
     clean(arr2);
-    deadoralive(arr1,arr1, walls);          //Al estar ambos arreglos con 0s lo que hacemos con esto llenarlo de...
-    deadoralive(arr2,arr2, walls);          //espacios para que tengan los requisitos del juego
+    deadoralive(arr1,arr1, p);          //Al estar ambos arreglos con 0s lo que hacemos con esto llenarlo de...
+    deadoralive(arr2,arr2, p);          //espacios para que tengan los requisitos del juego
     int i, j;                               //Variables punteros
     for(i=p[1] ; i<p[2] ; ++i)
     {
@@ -74,12 +75,12 @@ int deadoralive (char arr1[MAX][MAX],char arr2[MAX][MAX], int *p)  //Esta funciÃ
     return falive;                                         //Devolvemos la cantidad de celulas vivas en el nuevo mundo
 }
 
-static void clean(char arr1 [MAX][MAX])             //Funcion que se encarga de la limpieza de matrices
+static void clean(char arr1[MAX][MAX])             //Funcion que se encarga de la limpieza de matrices
 {
     int fil, col, size=sizeof(arr1)/sizeof(arr1[0]); //Sabemos que es un arreglo cuadrado
     for(fil=0;fil<=size;++fil)
     {
         for(col=0;col<=size;++col)
-          arr[fil][col]=0;
+          arr1[fil][col]=0;
     }
 }

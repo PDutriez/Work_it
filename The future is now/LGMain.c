@@ -20,7 +20,7 @@ int main (void)
       else if (input=='\n')
       {
           if (num<=100 && num>=1)
-              create(num, walls);
+              create(num, walls, universe, future);
           else
                printf("\nVuelva a ingresar los datos");
           putchar('\n');

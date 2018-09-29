@@ -1,5 +1,4 @@
 #include "PrintNChange.h"
-#include "Creation.h"
 #include <stdio.h>
 
 void print_mundo(char arr[MAX][MAX], int *p)                            //Esta funcion imprime la matriz en pantalla
@@ -34,7 +33,7 @@ void time_clean(int *p)                                           //Esta funcion
 {
     long time;
     for(time=0;time<300000000;++time);                          //El tiempo fijado fue elegido a ojo y gusto del programador
-    for(time=0;time<P[1];++time)                              //Se limia la pantalla para que aparezca ordenado
+    for(time=0;time<p[1];++time)                              //Se limia la pantalla para que aparezca ordenado
     printf("\n");
 
 }
