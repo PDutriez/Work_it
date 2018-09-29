@@ -16,7 +16,7 @@ void create(int n, int *p,char arr1[MAX][MAX],char arr2[MAX][MAX])//Creal la mat
     for(i=p[1] ; i<p[2] ; ++i)
     {
       for(j=p[1] ; j<p[2] ; j+=(n/2-1))
-      universe[i][j]='*';
+      arr1[i][j]='*';
     }
     printf("Tamaño cargado correctamente, por favor aprete 'S' para iniciar\n");
 }

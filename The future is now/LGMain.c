@@ -38,7 +38,7 @@ int main (void)
               time_clean(walls);
           }
           printf("Parece que el juego ha terminado....\n");
-          inicio=0, tope=0, talive=1; //Se cargan estos valores para poder reiniciar el juego en caso de terminarse
+          walls[1]=0, walls[2]=0, talive=1; //Se cargan estos valores para poder reiniciar el juego en caso de terminarse
       }
     }
 
