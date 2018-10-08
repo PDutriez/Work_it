@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "justpoint.h"
+#include "modulall.h"
 /*******************************************************************************
  * arreglos para guardar los argumentos que vamos a separar más adelante
  * en tres secciones distintas
@@ -21,7 +21,7 @@ int checkopt(int argc,char* argv[])
    return options;
 }
 
-int checkpar(int argc,char *argv[])
+int checkpar(int argc,char* argv[])
 {
   int word,parameters=0;
   for(word=1;word<argc;word++) //Empezamos en 1 para saltear el nombre
@@ -44,7 +44,7 @@ void checkname(const char* name,const char* mainname)
         if(*name++ != *mainname++)
           {
           status=0; //Implica que son distintos sus valore
-          printf("\n ERROR: Se ha modificado el nombre original del archivo\n");
+          printf("\nERROR: Se ha modificado el nombre original del archivo\n\n");
           }
     }
 }

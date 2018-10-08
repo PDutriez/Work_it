@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "justpoint.h"
+#include "modulall.h"
 # define NAME "modulall"
 int main(int argc,char* argv[])
 {
@@ -7,8 +7,8 @@ int main(int argc,char* argv[])
       checkname(argv[0],NAME);
       parameters=checkpar(argc,argv);
       options=checkopt(argc,argv);
-
-      printf("options:%d parametros:%d\n",options,parameters);
+//Imprimimos todos los valores mandados en la terminal, ya organizados
+      printf("opciones:%d parámetros:%d\n",options,parameters);
       for (int counter= 1; counter<=options; counter++)
       {
           printf ("\nOpción %d:", counter);
