@@ -4,34 +4,56 @@
  * arreglos para guardar los argumentos que vamos a separar más adelante
  * en tres secciones distintas
  ******************************************************************************/
-char * opciones [2][O_MAX];
-char * parametros [O_MAX];
+static char * opciones [2][O_MAX];
+static char * parametros [O_MAX];
 /******************************************************************************/
-int checkopt(int argc,char* argv[])
+char** checkopt(int argc,char* argv[])
 {
     int word,options=0;
     for(word=1;word<argc;word++) //Empezamos en 1 para saltear el nombre
     {
        if(*argv[word]=='-')
        {
-               opciones[0][options] = argv [word];
+               opciones[0][options] = argv [word]; //Guardamos su clave y valor
                opciones[1][options++] = argv [++word];
        }
    }
-   return options;
+   return opciones; //Cantidad total de opciones
 }
 
+int countopt(int argc,char* argv[])
+{
+    int count,cantidad=0;
+    for(count=1;count<argc;++count)
+    {
+        if(*argv[count] == '-')
+              ++cantidad;
+    }
+    return cantidad;
+}
+
+int countpar(int argc,char* argv[])
+{
+    int count,cantidad=0;
+    for(count=1;count<argc;++count)
+    {
+        if(*argv[count] == '-')
+              count+=2;
+        if(*argv[count] != '-')
+    }
+    return cantidad;
+}
 int checkpar(int argc,char* argv[])
 {
   int word,parameters=0;
   for(word=1;word<argc;word++) //Empezamos en 1 para saltear el nombre
   {
-     if(*argv [word]=='-')
+     if(*argv [word]=='-') //Si empieza con el guion, es una opcion y debemos saltearla
           word++;
-     else
+     else 	//En el caso contrario la unica opcion es que sea un parametro
           parametros[parameters++] = argv[word];
   }
-  return parameters;
+  return parameters; //Cantidad total de parametros
 }
 
 void checkname(const char* name,const char* mainname)

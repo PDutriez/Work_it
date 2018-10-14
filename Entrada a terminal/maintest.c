@@ -4,9 +4,11 @@
 int main(int argc,char* argv[])
 {
       int parameters,options;
+
       checkname(argv[0],NAME);
       parameters=checkpar(argc,argv);
       options=checkopt(argc,argv);
+
 //Imprimimos todos los valores mandados en la terminal, ya organizados
       printf("opciones:%d parámetros:%d\n",options,parameters);
       for (int counter= 1; counter<=options; counter++)
