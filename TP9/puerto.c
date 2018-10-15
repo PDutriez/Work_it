@@ -1,104 +1,125 @@
-#include<stdio.h>
-#include<stdint.h>
-#include"puerto.h"
+#include <stdint.h>
+#include <stdio.h>
+#include "puerto.h"
 
 typedef struct {
-  unit8_t   a;
-  unit8_t   b;
+  uint8_t   a;
+  uint8_t   b;
 } byte_t;
 typedef union {
-  unit16_t   d;
+  uint16_t   d;
   byte_t    ab;
 } acum_t;
 
-static int checknum(); //Funcion que recibe distintos tipos de numero y los transforma a decimal
-static unit16_t makeMask(int bit); //Funcion que crea mascaras para las funciones
-static acum_t registro;
 
-void bitSet(char registro,int bit)
+static acum_t registro; //Registro que usan todas las funciones para trabajar
+/*******************************************************************************
+* Las funciones bitSet,bitClr y bitToggle tienen la misma logica pero se
+* diferencian en sus operandos entre puerto y la mascara establecida. */
+void bitSet(char puerto,int bit)
 { //Necesitamos hacer un OR entre la mascara y el reistro
-    if(registro='b' || registro='B')
+    if(puerto=='b' || puerto=='B')
     {
       registro.ab.b|=(1<<bit);
     }
-    else if(registro='a' || registro='A')
+    else if(puerto=='a' || puerto=='A')
     {
       registro.ab.a|=(1<<bit);
     }
-    else if(registro='d' || registro='D')
+    else if(puerto=='d' || puerto=='D')
     {
       registro.d|=(1<<bit);
     }
 }
 
-void bitClr(char registro,int bit)
-{ //Necesitamos hacer un AND entre el registro y el complemento a uno de ma mascara
-    if(registro='b' || registro='B')
+void bitClr(char puerto,int bit)
+{//Necesitamos hacer un AND entre el registro y el complemento a uno de ma mascara
+    if(puerto=='b' || puerto=='B')
     {
       registro.ab.b&= ~(1<<bit);
     }
-    else if(registro='a' || registro='A')
+    else if(puerto=='a' || puerto=='A')
     {
       registro.ab.a&= ~(1<<bit);
     }
-    else if(registro='d' || registro='D')
+    else if(puerto=='d' || puerto=='D')
     {
       registro.d&= ~(1<<bit);
     }
 }
 
-void bitToggle(char registro,int bit)
+void bitToggle(char puerto,int bit)
 { //Necesitamos hacer un XOR entre el registro y la mascara
-    if(registro='b' || registro='B')
+    if(puerto=='b' || puerto=='B')
     {
       registro.ab.b^=(1<<bit);
     }
-    else if(registro='a' || registro='A')
+    else if(puerto=='a' || puerto=='A')
     {
       registro.ab.a^=(1<<bit);
     }
-    else if(registro='d' || registro='D')
+    else if(puerto=='d' || puerto=='D')
     {
       registro.d^=(1<<bit);
     }
 }
 
-void bitGet(char registro,int bit)
-{
+void bitGet(char puerto,int bit)
+{//Necesitamos aplicar la mascara para saber el valor del bit deseado
     int copy;
-    copy=registro&(1<<bit); //Aplicamos una mascara para saber el valor del bit deseado
-    printf("\nRegistro:%c\tBit:%d\tValor:%d\n",registro,bit,!!copy); //Con !!copy obtenemos si su valor es 0 o 1
+    if(puerto=='b' || puerto=='B')
+    {
+      copy=registro.ab.b&(1<<bit);
+    }
+    else if(puerto=='a' || puerto=='A')
+    {
+      copy=registro.ab.a&(1<<bit);
+    }
+    else if(puerto=='d' || puerto=='D')
+    {
+      copy=registro.d&(1<<bit);
+    }
+    printf("\nRegistro:%c\tBit:%d\tValor:%d\n",puerto,bit,!!copy);
+    //Con !!copy obtenemos si su valor es 0 o 1
 }
-
-void maskOn(char registro,int mask)
+/*******************************************************************************
+* Las funciones maskOn, maskOff, maskToggle llevan la misma logica pero,
+* se diferencian en la funcion que utilizan, es por eso que necesitamos una
+* para cada una. Su logica es hacer una mascara bit a bit, en vez de aplicar,
+* toda la mascara de una.
+*******************************************************************************/
+void maskOn(char puerto,int mask)
 {
-    for(int count=1;count<=16;++count,mask/2)
+    for(int count=0;count<=16;++count)
     {
         if(mask%2)
         {
-            bitSet(registro,count);
+            bitSet(puerto,count);
         }
+        mask/=2;
     }
 }
 
-void maskOff(char registro,int mask)
+void maskOff(char puerto,int mask)
 { //Hacemos bit a bit la mascara, utilizando las otras funciones
-    for(int count=1;count<=16;++count,mask/2)
+    for(int count=0;count<=16;++count)
     {
         if(mask%2)
         {
-            bitClr(registro,count);
+            bitClr(puerto,count);
         }
+        mask/=2;
     }
 }
 
-void maskToggle(char registro,int mask)
+void maskToggle(char puerto,int mask)
 {
-    for(int count=1;count<=16;++count,mask/2)
+    for(int count=0;count<=16;++count)
     {
         if(mask%2)
         {
-            bitToggle(registro,count);
+            bitToggle(puerto,count);
         }
+        mask/=2;
     }
 }
