@@ -6,7 +6,7 @@ int palindromo(char* arr,unsigned int length);
 
 int main() 
 {
-    char* chk="ReConocEr";
+    char* chk="Re Conoc            Er";
    if(palindromo(chk,strlen(chk)))
     printf("Es palindromo");
    else
@@ -15,10 +15,12 @@ int main()
 
 int palindromo(char* arr,unsigned int length)
 {
+    
+    printf("strlen=%d\tarr[0]=%c\tarr[length-1]=%c\n",length,arr[0],arr[length-1]);
     if(&arr[0]>=&arr[length-1]) //Verificamos que no se crucen las posiciones
             return 1;  
     else if(outcap(arr[0])&&outsmall(arr[0])) //Verificamos que sea letra
-            return(palindromo(++arr,length));
+            return(palindromo(++arr,length-1));
     else if(outcap(arr[length-1])&&outsmall(arr[length-1])) //Verificamos que sea letra
             return(palindromo(arr,length-2));
     else if(arr[0]==arr[length-1]) //Analizamos si las letras son iguales
